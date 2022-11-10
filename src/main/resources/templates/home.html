@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Relatorio de dados DNS Atlas Ripe</title>
+<title>Leitura de imagens</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -12,18 +12,35 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2>Leitor de PDF</h2>
-                <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
-                <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <input type="file" name="image" accept="application/pdf" class="form-control-file">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Ler PDF</button>
-                </form>
-                <span th:if="${msg != null}" th:text="${msg}"></span>
-            </div>
-        </div>
-    </div>
+                <h2>Envio de Notas</h2>
+                <form>
+					<div class="form-group">
+						<input id="fileupload" type="file" name="fileupload" accept="images/*" class="form-control-file"/> 
+						<button id="upload-button"  class="btn btn-primary"onclick="uploadFile()"> Upload </button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </section>
-</body>
+
+<script>
+async function uploadFile() {
+  let formData = new FormData(); 
+  formData.append("file", fileupload.files[0]);
+  let response = await fetch('/sendNote', {
+    method: "POST", 
+    body: formData
+  }); 
+
+  if (response.status == 200) {
+    alert("File successfully uploaded.");
+  }
+  else {
+    alert("error");
+  }
+}
+</script>
+
+</body> 
 </html>
