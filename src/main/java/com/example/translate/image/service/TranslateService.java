@@ -13,6 +13,8 @@ import net.sourceforge.tess4j.TesseractException;
 @Service
 public class TranslateService {
 
+	// camada de serviço, onde estancia o TESS4J, lê a imagem e converte em texto, retornando para o 
+	// front em JSON
 	public String calculateInfosProb( MultipartFile multipartFile ) throws IOException {
 		
 		File file = new File("C:/tess4J/targetFile.png");

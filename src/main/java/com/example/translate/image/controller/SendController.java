@@ -15,6 +15,8 @@ public class SendController {
 	@Autowired
 	private TranslateService translateService;
 	
+	
+	//controlador que recebe o arquivo enviado
 	@PostMapping("/sendNote")
 	public ResponseEntity<Object> sendNote( @RequestParam("file") MultipartFile file )
 	{
